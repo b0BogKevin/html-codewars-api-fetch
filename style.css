@@ -49,4 +49,8 @@ button:active{
 #result{
     display: block;
     margin: 10px;
+    background-color: rgb(2, 94, 2);
+    padding: 10px;
+    border-radius: 10px;
+    border: darkgreen 2px solid;
 }
