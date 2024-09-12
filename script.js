@@ -13,19 +13,21 @@ function CallAPI(params) {
 }
 function kiiras(adatok) {
     let ki = document.getElementById("result")
-    ki.innerHTML = ""
+    ki.innerHTML =""
     console.log(adatok)
-    ki.innerHTML += "<div class='resultname'>Név: " + adatok.username + "</div>"
+    ki.innerHTML += "<div class='resultname'>" + adatok.username + " adatai</div>"
     console.log(adatok.ranks.languages);
     ki.innerHTML+="<br>"
     ki.innerHTML+="<div> Összpontszám: " + adatok.ranks.overall.score +"</div>"
     ki.innerHTML+="<div> Teljesített feladatok: " + adatok.codeChallenges.totalCompleted + "</div>"
-
-    ki.innerHTML+="<br>"
+    let temp ="<table></tbody><tr><th>Nyelv</th><th>Pontszám</th><th>Kyu</th></tr>"
+    
     for (var property in adatok.ranks.languages) {
-        ki.innerHTML +="<div class='languageData'>"+ property + ': ' + adatok.ranks.languages[property].score +"pont; " + adatok.ranks.languages[property].name + "</div>";
+        temp +="<tr><td>"+ property + '</td><td> ' + adatok.ranks.languages[property].score +"pont</td><td> " + adatok.ranks.languages[property].name + "</td></tr>";
 
     }
+    temp+="</tbody></table>"
+    ki.innerHTML += temp
     
     console.log(ki)
 }
