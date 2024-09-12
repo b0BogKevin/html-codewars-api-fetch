@@ -23,7 +23,7 @@ function kiiras(adatok) {
     let temp ="<table></tbody><tr><th>Nyelv</th><th>Pontszám</th><th>Kyu</th></tr>"
     
     for (var property in adatok.ranks.languages) {
-        temp +="<tr><td>"+ property + '</td><td> ' + adatok.ranks.languages[property].score +"pont</td><td> " + adatok.ranks.languages[property].name + "</td></tr>";
+        temp +="<tr><td>"+ property + '</td><td> ' + adatok.ranks.languages[property].score +"</td><td> " + adatok.ranks.languages[property].name + "</td></tr>";
 
     }
     temp+="</tbody></table>"
