@@ -1,3 +1,4 @@
+his = []
 function CallAPI(params) {
 
     codewarsName = document.getElementById("name").value
@@ -5,18 +6,23 @@ function CallAPI(params) {
         .then(response => response.json())
         .then(adatok => {
             kiiras(adatok)
+            let obj ={name: adatok.username,score: adatok.ranks.overall.score}
+            
+            if (!his.some(e => e.name === adatok.username)) {
+                his.push(obj)
+              }
+            
         })
         .catch(error => {
             document.getElementById("result").innerHTML = "Nincs a keresésnek megfelelő találat"
 
         });
+        
 }
 function kiiras(adatok) {
     let ki = document.getElementById("result")
     ki.innerHTML =""
-    console.log(adatok)
     ki.innerHTML += "<div class='resultname'>" + adatok.username + " adatai</div>"
-    console.log(adatok.ranks.languages);
     ki.innerHTML+="<br>"
     ki.innerHTML+="<div> Összpontszám: " + adatok.ranks.overall.score +"</div>"
     ki.innerHTML+="<div> Teljesített feladatok: " + adatok.codeChallenges.totalCompleted + "</div>"
@@ -28,6 +34,38 @@ function kiiras(adatok) {
     }
     temp+="</tbody></table>"
     ki.innerHTML += temp
-    
-    console.log(ki)
+
+}
+function leaderboard() {
+    his.sort((a,b)=>b.score-a.score)
+    console.log(his);
+    ki = `<table><tr><th>név</th><th>Score</th></tr>`
+    for (const person of his) {
+        ki+="<tr><td>" + person.name + "</td><td>"+person.score + "</tr>"
+    }
+    ki+="</table>"
+    document.getElementById("leaderboard").innerHTML = ki
+}
+
+var mode = 1;
+function modeSwitch() {
+    mode*=-1
+    if (mode == 1) {
+        document.getElementById("content").innerHTML=`<h2>Codewars profile fetch</h2>
+        <input type="text" placeholder="Codewars Name" id="name">
+        <button onclick="CallAPI();">Lekérdezés</button>
+        <div id="result">A kért adat itt fog megjelenni</div>
+        <button class="modeSwitch" id="modeSwitch"
+        onclick="modeSwitch()">Ranglista mutatása</button>`
+    }
+    if (mode ==-1) {
+        document.getElementById("content").innerHTML=`<h2>Leaderboard</h2>
+        <div id="leaderboard"></div>
+        <button class="modeSwitch" id="modeSwitch"
+        onclick="modeSwitch()">Lekérés mutatása</button>`
+        
+        leaderboard()
+        
+        
+    }
 }
