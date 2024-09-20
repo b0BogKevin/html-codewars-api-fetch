@@ -37,11 +37,13 @@ function kiiras(adatok) {
 
 }
 function leaderboard() {
+    let i = 1
     his.sort((a,b)=>b.score-a.score)
     console.log(his);
-    ki = `<table><tr><th>név</th><th>Score</th></tr>`
+    ki = `<table><tr><th>#</th><th>név</th><th>Score</th></tr>`
     for (const person of his) {
-        ki+="<tr><td>" + person.name + "</td><td>"+person.score + "</tr>"
+        ki+="<tr><td>" + i + "</td><td>" + person.name + "</td><td>"+person.score + "</tr>"
+    i++;
     }
     ki+="</table>"
     document.getElementById("leaderboard").innerHTML = ki
